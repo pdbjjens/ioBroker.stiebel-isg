@@ -144,7 +144,11 @@
 			"Internet Service Gateway",
 			"ISG"
 		],
-		"license": "MIT",
+		"tier": 2,
+		"licenseInformation": {
+			"license": "MIT",
+			"type": "free"
+		},
 		"platform": "Javascript/Node.js",
 		"icon": "stiebel-isg.png",
 		"enabled": true,
@@ -156,7 +160,9 @@
 		"compact": true,
 		"connectionType": "local",
 		"dataSource": "poll",
-		"materialize": true,
+		"adminUI": {
+			"config": "materialize"
+		},
 		"dependencies": [
 			{
 				"js-controller": ">=6.0.11"
