@@ -1,7 +1,7 @@
 {
 	"common": {
 		"name": "stiebel-isg",
-		"version": "1.7.7",
+		"version": "2.0.0-alpha.0",
 		"news": {
 			"1.7.7": {
 				"en": "code enhancements for js-controller v5",
