@@ -1,192 +1,179 @@
 {
-	"common": {
-		"name": "stiebel-isg",
-		"version": "2.0.0-alpha.0",
-		"news": {
-			"1.7.7": {
-				"en": "code enhancements for js-controller v5",
-				"de": "Codeerweiterungen für js-controller v5",
-				"ru": "улучшения кода для js-controller v5",
-				"pt": "melhorias de código para js-controller v5",
-				"nl": "codeverhoging voor js-controller v5",
-				"fr": "améliorations de code pour js-controller v5",
-				"it": "miglioramenti del codice per js-controller v5",
-				"es": "mejoras de código para js-controller v5",
-				"pl": "rozszerzenia kodu dla js-controller v5",
-				"uk": "javascript licenses api веб-сайт go1.13.8",
-				"zh-cn": "b. 加强对控制的容忍 v 5"
-			  },
-			"1.7.6": {
-				"en": "fix for js-controller v5",
-				"de": "Anpassungen für js-controller v5",
-				"ru": "фикс для js-controller v5",
-				"pt": "correção para js-controller v5",
-				"nl": "vertaling:",
-				"fr": "fixation pour js-controller v5",
-				"it": "correzione per js-controller v5",
-				"es": "fijado para js-controller v5",
-				"pl": "zastosowanie js-controller v5",
-				"uk": "фіксація для js-controller v5",
-				"zh-cn": "fix 控方诉5"
-			  },
-			"1.7.5": {
-				"en": "security improvements",
-				"de": "Verbesserung der Sicherheit",
-				"ru": "улучшения безопасности",
-				"pt": "melhorias de segurança",
-				"nl": "beveiliging verbetert",
-				"fr": "amélioration de la sécurité",
-				"it": "miglioramento della sicurezza",
-				"es": "mejoras de seguridad",
-				"pl": "poprawa bezpieczeństwa",
-				"uk": "підвищення безпеки",
-				"zh-cn": "安全改善"
-			  },
-			"1.7.4": {
-				"en": "security improvements",
-				"de": "Verbesserung der Sicherheit",
-				"ru": "улучшения безопасности",
-				"pt": "melhorias de segurança",
-				"nl": "beveiliging verbetert",
-				"fr": "amélioration de la sécurité",
-				"it": "miglioramento della sicurezza",
-				"es": "mejoras de seguridad",
-				"pl": "poprawa bezpieczeństwa",
-				"uk": "підвищення безпеки",
-				"zh-cn": "安全改善"
-			  },
-			"1.7.3": {
-				"en": "bugfix",
-				"de": "Fehlerbehebung",
-				"ru": "багфикс",
-				"pt": "correção de erros",
-				"nl": "vuur",
-				"fr": "bugfix",
-				"it": "bugfix",
-				"es": "bugfix",
-				"pl": "trąbka",
-				"uk": "шемале",
-				"zh-cn": "b ugfix"
-			  },
-			"1.7.2": {
-				"en": "ready for Admin 5 and NodeJS 16",
-				"de": "Anpassungen für Admin 5 und NodeJS 16",
-				"ru": "готов к Admin 5 и NodeJS 16",
-				"pt": "pronto para Admin 5 e NodeJS 16",
-				"nl": "klaar voor Admin 5 en NodeJS 16",
-				"fr": "prêt pour Admin 5 et NodeJS 16",
-				"it": "pronto per Admin 5 e NodeJS 16",
-				"es": "listo para Admin 5 y NodeJS 16",
-				"pl": "admin 5 i NodeJS 16",
-				"uk": "готовий до Admin 5 і NodeJS 16",
-				"zh-cn": "准备为Admin 5和NodeJS 16"
-			  },
-			"1.7.1": {
-				"en": "bugfix for translation",
-				"de": "Bugfix für die Übersetzung",
-				"ru": "bugfix для перевода",
-				"pt": "bugfix para tradução",
-				"nl": "vertaling:",
-				"fr": "bugfix pour la traduction",
-				"it": "bugfix per la traduzione",
-				"es": "bugfix para la traducción",
-				"pl": "błąd w tłumaczeniu",
-				"uk": "виправлення помилок для перекладу",
-				"zh-cn": "b 翻译的顺序"
-			  },
-			"1.7.0": {
-				"en": "new adapter structure",
-				"de": "neue Adapterstruktur",
-				"ru": "новая структура адаптера",
-				"pt": "nova estrutura do adaptador",
-				"nl": "nieuwe adapterstructuur",
-				"fr": "nouvelle structure",
-				"it": "nuova struttura adattatore",
-				"es": "nueva estructura de adaptador",
-				"pl": "nowa struktura adaptacyjna",
-				"uk": "нова структура адаптера",
-				"zh-cn": "新的适应结构"
-			  }
-		},
-		"titleLang": {
-			"en": "Stiebel-ISG/Tecalor-ISG",
-			"de": "Stiebel-ISG/Tecalor-ISG",
-			"ru": "Stiebel-ISG/Текалор-ISG",
-			"pt": "Stiebel-ISG/Tecalor-ISG",
-			"nl": "Stiebel-ISG/Tecalor-ISG",
-			"fr": "Stiebel-ISG/Tecalor-ISG",
-			"it": "Stiebel-ISG/Tecalor-ISG",
-			"es": "Stiebel-ISG/Tecalor-ISG",
-			"pl": "Stiebel-ISG/Tecalor-ISG",
-			"uk": "Стібел-ІСГ/Текалор-ІСГ",
-			"zh-cn": "Stiebel-ISG/Tecalor-ISG"
-		  },
-		"desc": {
-			"en": "This adapter is a ment to read values from stiebel-eltron/tecalor internet service gateways (ISG) and control the device.",
-			"de": "Dieser Adapter dient zum Auslesen der Werten des Internetdienst-Gateways (ISG) von Stiebel-Eltron / Tecalor und zum Steuern des Geräts.",
-			"ru": "Этот адаптер является ментом для чтения значений от stiebel-eltron/tecalor internet service Gateways (ISG) и управления устройством.",
-			"pt": "Este adaptador é um complemento para ler valores de gateways de serviço de Internet esteibel-eltron/tecalor (ISG) e controlar o dispositivo.",
-			"nl": "Deze adapter is een ment om waarden te lezen van stiebel-eltron/tecalor internetbediening en controleer het apparaat.",
-			"fr": "Cet adaptateur est un ment pour lire les valeurs des passerelles de service Internet stiebel-eltron/tecalor (ISG) et contrôler l'appareil.",
-			"it": "Questo adattatore è un'azione per leggere i valori dai gateway di servizio internet di stiebel-eltron/tecalor (ISG) e controllare il dispositivo.",
-			"es": "Este adaptador es un ment para leer valores de los portales de servicio stiebel-eltron/tecalor de Internet (ISG) y controlar el dispositivo.",
-			"pl": "Ta adapter jest mentem do czytania wartości od stiebel-eltron/tecalorowych portali serwisowych (ISG) i kontroli urządzenia.",
-			"uk": "Цей адаптер є домом для зчитування значень від stiebel-eltron/tecalor Інтернет-додатків (ISG) та керування пристроєм.",
-			"zh-cn": "这种适应者是从半贝尔-客运/保护者互联网服务网(ISG)和控制该装置的价值观。."
-		  },
-		"authors": [
-			"Michael Schuster <development@unltd-networx.de>",
-			"iobroker-community-adapters <iobroker-community-adapters@gmx.de>",
-			"mcm1957 <mcm57@gmx.at>"
-		],
-		"keywords": [
-			"Stiebel-Eltron/Tecalor",
-			"Internet Service Gateway",
-			"ISG"
-		],
-		"tier": 2,
-		"licenseInformation": {
-			"license": "MIT",
-			"type": "free"
-		},
-		"platform": "Javascript/Node.js",
-		"icon": "stiebel-isg.png",
-		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.stiebel-isg/master/admin/stiebel-isg.png",
-		"readme": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg/blob/master/README.md",
-		"loglevel": "info",
-		"mode": "daemon",
-		"type": "climate-control",
-		"compact": true,
-		"connectionType": "local",
-		"dataSource": "poll",
-		"adminUI": {
-			"config": "materialize"
-		},
-		"dependencies": [
-			{
-				"js-controller": ">=6.0.11"
-			}
-	    ],
-    	"globalDependencies": [
-      		{
-		        "admin": ">=7.6.17"
-			}
-		]
-	},
-	"native": {
-		"isgUser": "",
-		"isgPassword": "",
-		"isgAddress": "",
-		"isgIntervall": 60,
-		"isgCommandIntervall": 3600,
-		"isgUmlauts": "no",
-		"isgExpert": false,
-		"isgCommandPaths": "0;4,0,0;4,0,1;4,0,2;4,0,3;4,0,4;4,0,5;4,1,0;4,1,1;4,2,0;4,2,1;4,2,2;4,2,4;4,2,6;4,2,3;4,2,5;4,2,7;4,3;4,3,0;4,3,1;4,3,2;4,3,3;4,3,4",
-		"isgValuePaths": "1,0;1,1;1,2;2,3;2,13",
-		"isgStatusPaths": "1,0;2,0",
-		"isgExpertPaths": "4,9,0;4,9,1;4,9,2;4,9,3;4,9,4;4,9,5;4,7;4,7,1;4,7,2;4,7,3;4,7,4;4,7,5;4,7,6;4,7,7;4,7,8"
-	},
-	"objects": [],
-	"instanceObjects": []
+  "common": {
+    "name": "stiebel-isg",
+    "version": "2.0.0-alpha.1",
+    "news": {
+      "2.0.0-alpha.1": {
+        "en": "Adapter has been migrated to iobroker-communita-adapters organisation\nAdapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now\nDependencies have been updated",
+        "de": "Adapter wurde auf iobroker-communita-adapter Organisation migriert\nAdapter benötigt node.js >= 20, js-controller >= 6.0.11 und admin >= 7.6.17 jetzt\nAbhängigkeiten wurden aktualisiert",
+        "ru": "Адаптер мигрировал в организацию iobroker-communita-adapters\nАдаптер требует node.js >= 20, js-контроллер >= 6.0.11 и админ >= 7.6.17 сейчас\nЗависимости были обновлены",
+        "pt": "Adaptador foi migrado para iobroker-communita-adaptadores organização\nO adaptador necessita de nodo.js >= 20, js-controlador >= 6.0.11 e administrador >= 7.6.17 agora\nAs dependências foram atualizadas",
+        "nl": "Adapter is gemigreerd naar iobroker-communita-adapters organisatie\nVoor adapters zijn node.js < 20, js-controller <= 6,0.11 en admin <= 7.6.17 nu vereist\nAfhankelijkheden zijn bijgewerkt",
+        "fr": "Adapter a été migré vers iobroker-communita-adaptateurs organisation\nAdapter nécessite node.js >= 20, js-controller >= 6.0.11 et admin >= 7.6.17 maintenant\nLes dépendances ont été actualisées",
+        "it": "L'adattatore è stato migrato all'organizzazione iobroker-communita-adapters\nAdattatore richiede node.js >= 20, js-controller >= 6.0.11 e admin >= 7.6.17 ora\nLe dipendenze sono state aggiornate",
+        "es": "Adapter ha sido migrado a iobroker-communita-adapters organisation\nAdaptador requiere node.js ю= 20, js-controller √= 6.0.11 y admin= 7.6.17 ahora\nSe han actualizado las dependencias",
+        "pl": "Adapter został przeniesiony do organizacji adapterów iobroker- communita\nAdapter wymaga node.js > = 20, kontroler js- i admin > = 7.6.17\nZaktualizowano zależności",
+        "uk": "Перехідник мігрований до організації iobroker-communita-adapters\nАдаптер вимагає node.js >= 20, js-controller >= 6.0.11 і admin >= 7.6.17 тепер\nЗалежність було оновлено",
+        "zh-cn": "适应者已迁移到职业中介-社区适应者组织\n适配器需要节点.js >= 20,js控制器 >= 6.0.11和admin >= 7.6.17 现在\n依赖关系已更新"
+      },
+      "1.7.7": {
+        "en": "code enhancements for js-controller v5",
+        "de": "Codeerweiterungen für js-controller v5",
+        "ru": "улучшения кода для js-controller v5",
+        "pt": "melhorias de código para js-controller v5",
+        "nl": "codeverhoging voor js-controller v5",
+        "fr": "améliorations de code pour js-controller v5",
+        "it": "miglioramenti del codice per js-controller v5",
+        "es": "mejoras de código para js-controller v5",
+        "pl": "rozszerzenia kodu dla js-controller v5",
+        "uk": "javascript licenses api веб-сайт go1.13.8",
+        "zh-cn": "b. 加强对控制的容忍 v 5"
+      },
+      "1.7.6": {
+        "en": "fix for js-controller v5",
+        "de": "Anpassungen für js-controller v5",
+        "ru": "фикс для js-controller v5",
+        "pt": "correção para js-controller v5",
+        "nl": "vertaling:",
+        "fr": "fixation pour js-controller v5",
+        "it": "correzione per js-controller v5",
+        "es": "fijado para js-controller v5",
+        "pl": "zastosowanie js-controller v5",
+        "uk": "фіксація для js-controller v5",
+        "zh-cn": "fix 控方诉5"
+      },
+      "1.7.5": {
+        "en": "security improvements",
+        "de": "Verbesserung der Sicherheit",
+        "ru": "улучшения безопасности",
+        "pt": "melhorias de segurança",
+        "nl": "beveiliging verbetert",
+        "fr": "amélioration de la sécurité",
+        "it": "miglioramento della sicurezza",
+        "es": "mejoras de seguridad",
+        "pl": "poprawa bezpieczeństwa",
+        "uk": "підвищення безпеки",
+        "zh-cn": "安全改善"
+      },
+      "1.7.4": {
+        "en": "security improvements",
+        "de": "Verbesserung der Sicherheit",
+        "ru": "улучшения безопасности",
+        "pt": "melhorias de segurança",
+        "nl": "beveiliging verbetert",
+        "fr": "amélioration de la sécurité",
+        "it": "miglioramento della sicurezza",
+        "es": "mejoras de seguridad",
+        "pl": "poprawa bezpieczeństwa",
+        "uk": "підвищення безпеки",
+        "zh-cn": "安全改善"
+      },
+      "1.7.3": {
+        "en": "bugfix",
+        "de": "Fehlerbehebung",
+        "ru": "багфикс",
+        "pt": "correção de erros",
+        "nl": "vuur",
+        "fr": "bugfix",
+        "it": "bugfix",
+        "es": "bugfix",
+        "pl": "trąbka",
+        "uk": "шемале",
+        "zh-cn": "b ugfix"
+      },
+      "1.7.2": {
+        "en": "ready for Admin 5 and NodeJS 16",
+        "de": "Anpassungen für Admin 5 und NodeJS 16",
+        "ru": "готов к Admin 5 и NodeJS 16",
+        "pt": "pronto para Admin 5 e NodeJS 16",
+        "nl": "klaar voor Admin 5 en NodeJS 16",
+        "fr": "prêt pour Admin 5 et NodeJS 16",
+        "it": "pronto per Admin 5 e NodeJS 16",
+        "es": "listo para Admin 5 y NodeJS 16",
+        "pl": "admin 5 i NodeJS 16",
+        "uk": "готовий до Admin 5 і NodeJS 16",
+        "zh-cn": "准备为Admin 5和NodeJS 16"
+      }
+    },
+    "titleLang": {
+      "en": "Stiebel-ISG/Tecalor-ISG",
+      "de": "Stiebel-ISG/Tecalor-ISG",
+      "ru": "Stiebel-ISG/Текалор-ISG",
+      "pt": "Stiebel-ISG/Tecalor-ISG",
+      "nl": "Stiebel-ISG/Tecalor-ISG",
+      "fr": "Stiebel-ISG/Tecalor-ISG",
+      "it": "Stiebel-ISG/Tecalor-ISG",
+      "es": "Stiebel-ISG/Tecalor-ISG",
+      "pl": "Stiebel-ISG/Tecalor-ISG",
+      "uk": "Стібел-ІСГ/Текалор-ІСГ",
+      "zh-cn": "Stiebel-ISG/Tecalor-ISG"
+    },
+    "desc": {
+      "en": "This adapter is a ment to read values from stiebel-eltron/tecalor internet service gateways (ISG) and control the device.",
+      "de": "Dieser Adapter dient zum Auslesen der Werten des Internetdienst-Gateways (ISG) von Stiebel-Eltron / Tecalor und zum Steuern des Geräts.",
+      "ru": "Этот адаптер является ментом для чтения значений от stiebel-eltron/tecalor internet service Gateways (ISG) и управления устройством.",
+      "pt": "Este adaptador é um complemento para ler valores de gateways de serviço de Internet esteibel-eltron/tecalor (ISG) e controlar o dispositivo.",
+      "nl": "Deze adapter is een ment om waarden te lezen van stiebel-eltron/tecalor internetbediening en controleer het apparaat.",
+      "fr": "Cet adaptateur est un ment pour lire les valeurs des passerelles de service Internet stiebel-eltron/tecalor (ISG) et contrôler l'appareil.",
+      "it": "Questo adattatore è un'azione per leggere i valori dai gateway di servizio internet di stiebel-eltron/tecalor (ISG) e controllare il dispositivo.",
+      "es": "Este adaptador es un ment para leer valores de los portales de servicio stiebel-eltron/tecalor de Internet (ISG) y controlar el dispositivo.",
+      "pl": "Ta adapter jest mentem do czytania wartości od stiebel-eltron/tecalorowych portali serwisowych (ISG) i kontroli urządzenia.",
+      "uk": "Цей адаптер є домом для зчитування значень від stiebel-eltron/tecalor Інтернет-додатків (ISG) та керування пристроєм.",
+      "zh-cn": "这种适应者是从半贝尔-客运/保护者互联网服务网(ISG)和控制该装置的价值观。."
+    },
+    "authors": [
+      "Michael Schuster <development@unltd-networx.de>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>",
+      "mcm1957 <mcm57@gmx.at>"
+    ],
+    "keywords": [
+      "Stiebel-Eltron/Tecalor",
+      "Internet Service Gateway",
+      "ISG"
+    ],
+    "tier": 2,
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
+    "platform": "Javascript/Node.js",
+    "icon": "stiebel-isg.png",
+    "enabled": true,
+    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.stiebel-isg/master/admin/stiebel-isg.png",
+    "readme": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg/blob/master/README.md",
+    "loglevel": "info",
+    "mode": "daemon",
+    "type": "climate-control",
+    "compact": true,
+    "connectionType": "local",
+    "dataSource": "poll",
+    "adminUI": {
+      "config": "materialize"
+    },
+    "dependencies": [
+      {
+        "js-controller": ">=6.0.11"
+      }
+    ],
+    "globalDependencies": [
+      {
+        "admin": ">=7.6.17"
+      }
+    ]
+  },
+  "native": {
+    "isgUser": "",
+    "isgPassword": "",
+    "isgAddress": "",
+    "isgIntervall": 60,
+    "isgCommandIntervall": 3600,
+    "isgUmlauts": "no",
+    "isgExpert": false,
+    "isgCommandPaths": "0;4,0,0;4,0,1;4,0,2;4,0,3;4,0,4;4,0,5;4,1,0;4,1,1;4,2,0;4,2,1;4,2,2;4,2,4;4,2,6;4,2,3;4,2,5;4,2,7;4,3;4,3,0;4,3,1;4,3,2;4,3,3;4,3,4",
+    "isgValuePaths": "1,0;1,1;1,2;2,3;2,13",
+    "isgStatusPaths": "1,0;2,0",
+    "isgExpertPaths": "4,9,0;4,9,1;4,9,2;4,9,3;4,9,4;4,9,5;4,7;4,7,1;4,7,2;4,7,3;4,7,4;4,7,5;4,7,6;4,7,7;4,7,8"
+  },
+  "objects": [],
+  "instanceObjects": []
 }
