@@ -6,16 +6,27 @@
     "name": "Michael Schuster",
     "email": "development@unltd-networx.de"
   },
-  "homepage": "https://github.com/unltdnetworx/ioBroker.stiebel-isg",
+  "contributors": [
+    {
+      "name": "iobroker-community-adapters",
+      "email": "iobroker-community-adapters@gmx.de"
+    },
+    {
+      "name": "mcm1957",
+      "email": "mcm57@gmx.at"
+    }
+  ],
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg",
   "license": "MIT",
   "keywords": [
+    "ioBroker",
     "Stiebel-Eltron/Tecalor",
     "Internet Service Gateway",
     "ISG"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/unltdnetworx/ioBroker.stiebel-isg"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.8",
@@ -64,7 +75,7 @@
     "lint": "eslint --ext .js,.jsx"
   },
   "bugs": {
-    "url": "https://github.com/unltdnetworx/ioBroker.stiebel-isg/issues"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg/issues"
   },
   "readmeFilename": "README.md"
 }

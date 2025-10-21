@@ -135,7 +135,9 @@
 			"zh-cn": "这种适应者是从半贝尔-客运/保护者互联网服务网(ISG)和控制该装置的价值观。."
 		  },
 		"authors": [
-			"Michael Schuster <development@unltd-networx.de>"
+			"Michael Schuster <development@unltd-networx.de>",
+			"iobroker-community-adapters <iobroker-community-adapters@gmx.de>",
+			"mcm1957 <mcm57@gmx.at>"
 		],
 		"keywords": [
 			"Stiebel-Eltron/Tecalor",
@@ -146,8 +148,8 @@
 		"platform": "Javascript/Node.js",
 		"icon": "stiebel-isg.png",
 		"enabled": true,
-		"extIcon": "https://raw.githubusercontent.com/unltdnetworx/ioBroker.stiebel-isg/master/admin/stiebel-isg.png",
-		"readme": "https://github.com/unltdnetworx/ioBroker.stiebel-isg/blob/master/README.md",
+		"extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.stiebel-isg/master/admin/stiebel-isg.png",
+		"readme": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg/blob/master/README.md",
 		"loglevel": "info",
 		"mode": "daemon",
 		"type": "climate-control",
