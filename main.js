@@ -715,6 +715,11 @@ function main() {
 		() => adapter.subscribeStates("ISGReboot")
 	);
 
+	if( adapter.config.isgAddress == '' ){
+		adapter.log.error(`Invalid configuration - isgAddress not set.`);
+		return;
+	}
+
 	host = adapter.config.isgAddress;
 	if(host.search(/http/i) == -1){
 		host = "http://" + host;
