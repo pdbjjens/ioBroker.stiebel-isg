@@ -28,6 +28,9 @@
     "type": "git",
     "url": "https://github.com/iobroker-community-adapters/ioBroker.stiebel-isg"
   },
+  "engines": {
+    "node": ">= 20"
+  },
   "dependencies": {
     "@iobroker/adapter-core": "^2.6.8",
     "cheerio": "^1.0.0-rc.10",
