@@ -61,7 +61,7 @@ function startAdapter(options) {
                         nameTranslation = require(`./lang/i18n/${systemLanguage}/translations.json`);
                     }
 
-					setJar(request.jar());
+                    setJar(request.jar());
                     main();
                 }
             });
