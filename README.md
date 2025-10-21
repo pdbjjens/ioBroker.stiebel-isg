@@ -15,26 +15,31 @@
 
 This adapter is a ment to read values from stiebel-eltron/tecalor internet service gateways (ISG) and control the device.
 
-USE AT YOUR OWN RISK!!! ABSOLUTELY NO WARRANTY FOR DAMAGES, ETC.!!!
-
-Help or hints are welcome.
-
-## Donate
-
-Kaffee spendieren/serve a coffee
-<https://paypal.me/unltdnetworx>
 
 ## Steps
 
 1. Install the adpater
-
 2. Grab the values out of the your stiebel-isg.[x]-object.
 
 ## Requirements
 
 * stiebel-eltron/tecalor internet service gateway (ISG)
 
+## Credits
+
+This adapter would not have been possible without the great work of Michael Schuster (unltdnetworx) <https://github.com/unltdnetworx>, who created previous releases of this adapter.
+
 ## Changelog
+
+<!--
+	Placeholder for the next version (at the beginning of the line):
+	### **WORK IN PROGRESS**
+-->
+### **WORK IN PROGRESS**
+
+- (mcm1957) Adapter has been migrated to iobroker-communita-adapters organisation
+- (mcm1957) Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now
+- (mcm1957) Dependencies have been updated
 
 ### 1.7.7
 
