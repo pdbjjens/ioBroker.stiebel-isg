@@ -35,7 +35,7 @@ This adapter would not have been possible without the great work of Michael Schu
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0-alpha.0 (2025-10-21)
 
 - (mcm1957) Adapter has been migrated to iobroker-communita-adapters organisation
 - (mcm1957) Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now
@@ -56,42 +56,6 @@ This adapter would not have been possible without the great work of Michael Schu
 ### 1.7.4
 
 * security enhancements
-
-### 1.7.3
-
-* bugfix
-
-### 1.7.2
-
-* ready for Admin 5 and NodeJS 16
-
-### 1.7.1
-
-* bugfix for translation
-
-### 1.7.0
-
-* new adapter structure, bugfixes for new js-controller
-
-### 1.6.1
-
-* new values for isg-version 12 implemented
-
-### 1.6.0
-
-* isg-sites to read values from, can now be select by the user
-
-### 1.5.3
-
-* bugfix for latest_value added in statistics for database
-
-### 1.5.2
-
-* latest_value added in statistics for database
-
-### 1.5.1
-
-* new adapter testing and security update
 
 ## License
 MIT License
