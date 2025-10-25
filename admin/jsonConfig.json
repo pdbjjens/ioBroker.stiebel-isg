@@ -1,0 +1,159 @@
+{
+  "i18n": true,
+  "type": "tabs",
+  "tabsStyle": {
+    "width": "calc(100% - 100px)"
+  },
+  "items": {
+    "tab_main": {
+      "type": "panel",
+      "label": "Main settings",
+      "items": {
+        "isgAddress": {
+          "type": "text",
+          "label": "IP address or domain",
+          "help": "IP address or domain_help",
+          "tooltip": "IP address or domain_tips",
+          "default": "",
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgUser": {
+          "type": "text",
+          "label": "username",
+          "help": "username_help",
+          "tooltip": "username_tips",
+          "default": "",
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgPassword": {
+          "type": "password",
+          "repeat": false,
+          "visible": true,
+          "label": "isg password",
+          "help": "isg password_help",
+          "tooltip": "isg password_tips",
+          "default": "",
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgUmlauts": {
+          "type": "select",
+          "label": "umlauts active",
+          "help": "umlauts active_help",
+          "tooltip": "umlauts active_tips",
+          "default": "no",
+          "options": [
+            { "value": "yes", "label": "yes" },
+            { "value": "no", "label": "no" }
+          ],
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgExpert": {
+          "type": "checkbox",
+          "label": "enable expert values",
+          "help": "enable expert values_help",
+          "tooltip": "enable expert values_tips",
+          "default": false,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgIntervall": {
+          "type": "number",
+          "label": "intervall (s)",
+          "help": "intervall (s)_help",
+          "default": 60,
+          "min": 1,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
+        "isgCommandIntervall": {
+          "type": "number",
+          "label": "intervall (commands) (s)",
+          "help": "intervall (commands) (s)_help",
+          "default": 3600,
+          "min": 1,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        }
+      }
+    },
+    "tab_urls": {
+      "type": "panel",
+      "label": "URLs",
+      "items": {
+        "isgCommandPaths": {
+          "type": "text",
+          "label": "command paths",
+          "help": "command paths_help",
+          "tooltip": "command paths_tips",
+          "default": "0;4,0,0;4,0,1;4,0,2;4,0,3;4,0,4;4,0,5;4,1,0;4,1,1;4,2,0;4,2,1;4,2,2;4,2,4;4,2,6;4,2,3;4,2,5;4,2,7;4,3;4,3,0;4,3,1;4,3,2;4,3,3;4,3,4",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "isgValuePaths": {
+          "type": "text",
+          "label": "value paths",
+          "help": "value paths_help",
+          "tooltip": "value paths_tips",
+          "default": "1,0;1,1;1,2;2,3;2,13",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "isgStatusPaths": {
+          "type": "text",
+          "label": "status paths",
+          "help": "status paths_help",
+          "tooltip": "status paths_tips",
+          "default": "1,0;2,0",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        },
+        "isgExpertPaths": {
+          "type": "text",
+          "label": "expert paths",
+          "help": "expert paths_help",
+          "tooltip": "expert paths_tips",
+          "default": "4,9,0;4,9,1;4,9,2;4,9,3;4,9,4;4,9,5;4,7;4,7,1;4,7,2;4,7,3;4,7,4;4,7,5;4,7,6;4,7,7;4,7,8",
+          "xs": 12,
+          "sm": 12,
+          "md": 12,
+          "lg": 12,
+          "xl": 12
+        }
+      }
+    }
+  }
+}
