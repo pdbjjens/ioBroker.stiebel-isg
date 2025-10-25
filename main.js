@@ -55,13 +55,15 @@ function startAdapter(options) {
                 } else if (obj) {
                     if (!obj.common.language) {
                         adapter.log.info('Language not set. English set therefore.');
-                        nameTranslation = require('./lang/i18n/en/translations.json');
+                        nameTranslation = require('./admin/i18n/en/translations.json');
                     } else {
                         systemLanguage = obj.common.language;
-                        nameTranslation = require(`./lang/i18n/${systemLanguage}/translations.json`);
+                        nameTranslation = require(`./admin/i18n/${systemLanguage}/translations.json`);
                     }
 
                     setJar(request.jar());
+                    // Reset the connection indicator during startup
+                    adapter.setState('info.connection', false, true);
                     main();
                 }
             });
@@ -122,7 +124,7 @@ function translateName(strName, intType) {
         case 0:
         default:
             if (nameTranslation[strName]) {
-                return nameTranslation[strName][0];
+                return nameTranslation[strName];
             }
             return strName;
     }
@@ -196,13 +198,16 @@ function getHTML(sidePath) {
     return new Promise(function (resolve, reject) {
         request(options, function (error, response, content) {
             if (!error && response.statusCode == 200) {
+                adapter.setState('info.connection', true, true);
                 resolve(cheerio.load(content));
             } else if (error) {
                 adapter.log.error(`Error: ${error}`);
+                adapter.setState('info.connection', false, true);
                 reject(error);
             } else if (response.statusCode !== 200) {
                 adapter.log.error(`statusCode: ${response.statusCode}`);
                 adapter.log.error(`statusText: ${response.statusText}`);
+                adapter.setState('info.connection', false, true);
                 reject(error);
             }
         });
@@ -553,7 +558,7 @@ async function getIsgCommands(sidePath) {
                                 });
                             statesCommand += '}';
                             createISGCommands(
-                                translateName('Start'),
+                                translateName('start'),
                                 idCommand,
                                 nameCommand,
                                 'number',
