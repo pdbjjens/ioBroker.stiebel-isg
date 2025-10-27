@@ -59,12 +59,6 @@ The other settings and the the list of the web pages of the ISG on tab URLs shou
 * (pdbjjens) Change: migrate from deprecated "request" http client to native fetch API
 * (pdbjjens) Fix: min/max handling
 
-### 2.0.0-alpha.1 (2025-10-21)
-
-* (mcm1957) Adapter has been migrated to iobroker-communita-adapters organisation
-* (mcm1957) Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now
-* (mcm1957) Dependencies have been updated
-
 ### 1.7.7
 
 * security- and compatibility update
