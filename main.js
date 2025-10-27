@@ -22,7 +22,7 @@ const tough = require('tough-cookie');
 const fetchCookieModule = (() => {
     try {
         return require('fetch-cookie');
-    } catch (e) {
+    } catch {
         return null;
     }
 })();
@@ -584,7 +584,7 @@ function createISGCommands(
             if (s.startsWith('{') || s.startsWith('[')) {
                 try {
                     desiredCommon.states = JSON.parse(s);
-                } catch (e) {
+                } catch {
                     try {
                         desiredCommon.states = JSON.parse(s.replace(/'/g, '"'));
                     } catch {
@@ -1264,7 +1264,7 @@ function startAdapter(options) {
                         systemLanguage = obj.common.language;
                         try {
                             nameTranslation = require(`./admin/i18n/${systemLanguage}/translations.json`);
-                        } catch (e) {
+                        } catch {
                             adapter.log.warn(`Translations for ${systemLanguage} not found, falling back to English.`);
                             nameTranslation = require('./admin/i18n/en/translations.json');
                         }
