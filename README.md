@@ -34,14 +34,14 @@ Upgrade your ioBroker to at least this software level, if you want to use this a
 If you update this adapter from a previous version instead of a new installation, the adapter may not start, even if your password in your config is correct and has not been changed. To fix this, simply enter the same previous password once more in the config UI and store and close the config UI to restart the adapter. This of course is only neccessary once after the first start after the update.
 
 * The type and/or name of some objects in the object tab has changed
-If you update this adapter from a previous version instead of a new installation, you may possibly find warnings in the ioBroker log or objects and/or names are not updated correctly. To prevent this from happening, the most simple solution is to stop the adapter in the instances tab of ioBroker, completely delete the object tree in the objects tab and then restart the adapter. This of course is only neccessary once after the update and is not required if you do a clean new installation.
+If you update this adapter from a previous version instead of a new installation, you may possibly find warnings in the ioBroker log or object values and/or names are not updated correctly. To prevent this from happening, the most simple solution is to stop the adapter in the instances tab of ioBroker, completely delete the object tree in the objects tab and then restart the adapter. This of course is only neccessary once after the update and is not required if you do a clean new installation.
 
 ## Installation
 
 1. You need a fully configured and running STIEBEL ELTRON or Tecalor Internet Service Gateway (ISG Web or ISG Plus) in the same network as your ioBroker server.
 2. Install the adapter on your ioBroker server and create an instance
 3. Configure the instance by entering the IP-address or domain name of the ISG and if configured in the ISG, the user name and password.  
-The other settings should be left at their default values unless you know what you are doing.
+The other settings and the the list of the web pages of the ISG on tab URLs should be left at their default values unless you know what you are doing.
 
 ## Changelog
 
@@ -56,6 +56,8 @@ The other settings should be left at their default values unless you know what y
 * (mcm1957) Fix: Dependencies have been updated
 * (pdbjjens) Change: remove .npmignore
 * (pdbjjens) Change: migrate adapter configuration to jsonConfig
+* (pdbjjens) Change: migrate from deprecated "request" http client to native fetch API
+* (pdbjjens) Fix: min/max handling
 
 ### 2.0.0-alpha.1 (2025-10-21)
 
