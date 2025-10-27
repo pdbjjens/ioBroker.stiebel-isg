@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "stiebel-isg",
-    "version": "2.0.0-alpha.1",
+    "version": "2.0.0",
     "news": {
+      "2.0.0": {
+        "en": "Change: Adapter has been migrated to iobroker-community-adapters organisation\nChange: Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now\nFix: Dependencies have been updated\nChange: remove .npmignore\nChange: migrate adapter configuration to jsonConfig\nChange: migrate from deprecated \"request\" http client to native fetch API\nFix: min/max handling",
+        "de": "Änderung: Adapter wurde auf iobroker-community-Adapter-Organisation migriert\nÄnderung: Adapter erfordert node.js >= 20, js-controller >= 6.0.11 und admin >= 7.6.17\nFix: Abhängigkeiten wurden aktualisiert\nÄnderung: .npmignore entfernt\nÄnderung: Adapterkonfiguration auf jsonConfig migriert\nÄnderung: http-Client zu nativer fetch API migriert\nFix: min/max Handhabung",
+        "ru": "Изменение: Адаптер был перемещен в организацию адаптации сообщества йоброкеров\nАдаптер требует node.js >= 20, js-контроллер >= 6.0.11 и админ >= 7.6.17\nИсправление: Зависимости были обновлены\nИзменение: удалить .npmignore\nИзменение: перенос конфигурации адаптера в jsonConfig\nИзменение: переход от устаревшего http-клиента «запрос» к нативному API fetch\nИсправление: min/max обработка",
+        "pt": "Mudança: O adaptador foi migrado para a organização de adaptadores de comunidades iobroker\nAlteração: O adaptador necessita de nodo.js >= 20, js-controlador >= 6.0.11 e administrador >= 7.6.17 agora\nCorrigir: Dependências foram atualizadas\nAlteração: remover .npmignore\nAlterar: migrar a configuração do adaptador para o jsonConfig\nAlteração: migrar do \"requisito\" obsoleto do cliente http para a API de busca nativa\nFixação: manipulação min/max",
+        "nl": "Verandering: Adapter is gemigreerd naar iobroker-community-adapters organisatie\nVoor de toepassing van deze onderverdeling wordt verstaan onder:\nFix: Afhankelijkheden zijn bijgewerkt\nWijzigen: verwijderen .npmignore\nWijzigen: adapterconfiguratie migreren naar jsonConfig\nVerandering: migreren van verouderde \"verzoek\" http client naar native apport API\nFix: min/max hantering",
+        "fr": "Changement: l'adaptateur a été transféré vers l'organisation iobroker-community-adapters\nChangement: Adapter nécessite node.js >= 20, js-controller >= 6.0.11 et admin >= 7.6.17 maintenant\nCorrection : Les dépendances ont été mises à jour\nChangement: supprimer .npmignore\nChangement : migrer la configuration de l'adaptateur vers jsonConfig\nChangement : migrer de la \"requête\" obsolète http client vers native fetch API\nFixe: manipulation min/max",
+        "it": "Modifica: L'adattatore è stato migrato all'organizzazione di adattatori della comunità-iobroker\nModifica: Adattatore richiede node.js >= 20, js-controller >= 6.0.11 e admin >= 7.6.17 ora\nFisso: Le dipendenze sono state aggiornate\nCambio: rimuovere .npmignore\nModifica: migrare la configurazione dell'adattatore a jsonConfig\nCambiamento: migrare da deprecated \"request\" http client to native fetch API\nFisso: min/max movimentazione",
+        "es": "Cambio: Adaptador ha sido migrado a la organización de ibroker-community-adapters\nCambio: Adaptador requiere node.js >= 20, js-controller √= 6.0.11 y admin= 7.6.17 ahora\nFijación: Se han actualizado las dependencias\nCambio: retirar .npmignore\nCambio: configuración del adaptador de migrar a jsonConfig\nCambio: migrar desde el cliente http de \"request\" deprecatado a la API de lotes nativos\nFijación: min/max manipulación",
+        "pl": "Zmiana: Adapter został przeniesiony do organizacji adapterów społeczności iobrokerowej\nZmiana: Adapter wymaga node.js > = 20, kontroler js- i admin > = 7.6.17\nFix: Zależności zostały zaktualizowane\nZmiana: usunąć .npmignore\nZmiana: migrate konfiguracji adaptera do jsonConfig\nZmiana: migrate z \"request\" http client to native fetch API\nFix: min / max handling",
+        "uk": "Зміна: Перехідник мігрований до організації iobroker-community-adapters\nЗміна: Адаптер вимагає node.js >= 20, js-controller >=6.0.11 і admin >= 7.6.17 тепер\nВиправлення: В залежності було оновлено\nЗміна: видалення .npmignore\nЗміна: налаштування адаптера migrate до jsonConfig\nЗміна: migrate від deprecated \"request\"\nФіксація: обробка хв/max",
+        "zh-cn": "变化:适应者已迁移到职业经纪人-社区适应者组织\n更改:适配器需要节点.js >= 20,js控制器 >= 6.0.11和管理员 >= 7.6.17 现在\n修正: 已更新依赖性\n更改: 删除.npmignore\n更改: 将适配器配置迁移到 jsonConfig\n更改: 从已贬值的“ 请求” http客户端迁移到本地获取 API\n固定:分钟/最大处理"
+      },
       "2.0.0-alpha.1": {
         "en": "Adapter has been migrated to iobroker-communita-adapters organisation\nAdapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now\nDependencies have been updated",
         "de": "Adapter wurde auf iobroker-communita-adapter Organisation migriert\nAdapter benötigt node.js >= 20, js-controller >= 6.0.11 und admin >= 7.6.17 jetzt\nAbhängigkeiten wurden aktualisiert",
@@ -80,19 +93,6 @@
         "pl": "trąbka",
         "uk": "шемале",
         "zh-cn": "b ugfix"
-      },
-      "1.7.2": {
-        "en": "ready for Admin 5 and NodeJS 16",
-        "de": "Anpassungen für Admin 5 und NodeJS 16",
-        "ru": "готов к Admin 5 и NodeJS 16",
-        "pt": "pronto para Admin 5 e NodeJS 16",
-        "nl": "klaar voor Admin 5 en NodeJS 16",
-        "fr": "prêt pour Admin 5 et NodeJS 16",
-        "it": "pronto per Admin 5 e NodeJS 16",
-        "es": "listo para Admin 5 y NodeJS 16",
-        "pl": "admin 5 i NodeJS 16",
-        "uk": "готовий до Admin 5 і NodeJS 16",
-        "zh-cn": "准备为Admin 5和NodeJS 16"
       }
     },
     "titleLang": {

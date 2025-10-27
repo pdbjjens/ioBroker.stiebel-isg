@@ -49,7 +49,7 @@ The other settings and the the list of the web pages of the ISG on tab URLs shou
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.0 (2025-10-27)
 
 * (mcm1957) Change: Adapter has been migrated to iobroker-community-adapters organisation
 * (mcm1957) Change: Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now
@@ -74,10 +74,6 @@ The other settings and the the list of the web pages of the ISG on tab URLs shou
 * fix error with controller v5
 
 ### 1.7.5
-
-* security enhancements
-
-### 1.7.4
 
 * security enhancements
 
