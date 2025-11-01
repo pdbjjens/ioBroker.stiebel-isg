@@ -36,7 +36,7 @@ This adapter interfaces with **Stiebel-Eltron/Tecalor Internet Service Gateway (
 - `isgExpertPaths`: Additional paths for expert mode
 
 #### Technical Stack:
-- **HTTP Client**: Uses the `request` library for HTTP communication
+- **HTTP Client**: Uses the native `fetch` API for HTTP communication
 - **HTML Parsing**: Uses Cheerio for parsing ISG web interface responses
 - **Cookie Management**: Uses tough-cookie for session management
 - **Testing**: Uses Mocha for unit and integration tests
