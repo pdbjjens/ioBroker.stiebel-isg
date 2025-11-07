@@ -35,7 +35,7 @@
     "@iobroker/adapter-core": "^3.3.2",
     "cheerio": "^1.0.0-rc.10",
     "fetch-cookie": "^3.1.0",
-    "tough-cookie": "^4.1.4"
+    "tough-cookie": "^6.0.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^5.0.0",
