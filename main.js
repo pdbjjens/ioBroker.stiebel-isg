@@ -240,6 +240,70 @@ function Umlauts(text_string) {
         .replace(/[\u00dc]+/g, 'UE');
 }
 
+/*
+ * safeSetState: wrapper around adapter.setState that:
+ * - If the object is not a valNN object write it directly.
+ * - If the object has common.min/common.max, clamp values to avoid ioBroker warnings.
+ * - Accepts optional expire param.
+ */
+function safeSetState(id, val, ack = true, expire) {
+    // If it's not a valNN state, just set it
+    const last = id.split('.').pop();
+    const m = last && last.match(/^val(\d+)$/);
+    if (!m) {
+        // Not a valNN => write directly
+        try {
+            if (typeof expire !== 'undefined') {
+                adapter.setState(id, { val: val, ack: ack, expire: expire });
+            } else {
+                adapter.setState(id, { val: val, ack: ack });
+            }
+        } catch (err) {
+            adapter.log && adapter.log.warn && adapter.log.warn(`safeSetState: setState failed for ${id}: ${err}`);
+        }
+        return;
+    }
+
+    // Otherwise write, but first clamp to min/max if the object defines them
+    adapter.getObject(id, (err2, obj) => {
+        let finalVal = val;
+        try {
+            if (!err2 && obj && obj.common) {
+                const { min, max } = obj.common;
+                if (typeof min !== 'undefined' && !isNaN(Number(min)) && !isNaN(Number(finalVal))) {
+                    if (Number(finalVal) < Number(min)) {
+                        adapter.log.debug(
+                            `safeSetState: clamping ${id} value ${finalVal} -> min ${Number(min)} to avoid warning`,
+                        );
+                        finalVal = Number(min);
+                    }
+                }
+                if (typeof max !== 'undefined' && !isNaN(Number(max)) && !isNaN(Number(finalVal))) {
+                    if (Number(finalVal) > Number(max)) {
+                        adapter.log.debug(
+                            `safeSetState: clamping ${id} value ${finalVal} -> min ${Number(min)} to avoid warning`,
+                        );
+                        // set finalVal to min to mimic behaviour of ISG widget pre7
+                        finalVal = Number(min);
+                    }
+                }
+            }
+        } catch (e) {
+            adapter.log.silly && adapter.log.silly(`safeSetState: clamp check error for ${id}: ${e.message || e}`);
+        }
+
+        try {
+            if (typeof expire !== 'undefined') {
+                adapter.setState(id, { val: finalVal, ack: ack, expire: expire });
+            } else {
+                adapter.setState(id, { val: finalVal, ack: ack });
+            }
+        } catch (e) {
+            adapter.log && adapter.log.warn && adapter.log.warn(`safeSetState: setState failed for ${id}: ${e}`);
+        }
+    });
+}
+
 function updateState(strGroup, valTag, valTagLang, valType, valUnit, valRole, valValue) {
     if (valTag == null) {
         return;
@@ -278,7 +342,8 @@ function updateState(strGroup, valTag, valTagLang, valType, valUnit, valRole, va
             native: {},
         },
         function () {
-            adapter.setState(`${strGroup}.${valTag}`, { val: valValue, ack: true, expire: ValueExpire });
+            //adapter.setState(`${strGroup}.${valTag}`, { val: valValue, ack: true, expire: ValueExpire });
+            safeSetState(`${strGroup}.${valTag}`, valValue, true, ValueExpire);
         },
     );
 }
@@ -640,7 +705,8 @@ function createISGCommands(
                     native: {},
                 },
                 function () {
-                    adapter.setState(id, { val: valValue, ack: true });
+                    //adapter.setState(id, { val: valValue, ack: true });
+                    safeSetState(id, valValue, true);
                 },
             );
         } else {
@@ -708,11 +774,13 @@ function createISGCommands(
                             adapter.log.error(`createISGCommands: extendObject failed for ${id}: ${err2}`);
                     }
                     // Always set the state value after ensuring object exists/updated
-                    adapter.setState(id, { val: valValue, ack: true });
+                    safeSetState(id, valValue, true);
+                    //adapter.setState(id, { val: valValue, ack: true });
                 });
             } else {
                 // No update required; just set the state value
-                adapter.setState(id, { val: valValue, ack: true });
+                safeSetState(id, valValue, true);
+                // adapter.setState(id, { val: valValue, ack: true });
             }
         }
     });

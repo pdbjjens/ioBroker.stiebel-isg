@@ -49,6 +49,10 @@ The other settings and the the list of the web pages of the ISG on tab URLs shou
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (pdbjjens) Fix: Avoid warnings if ISG sets default value 36864 (#53 & #65)
+
 ### 2.0.0 (2025-10-27)
 
 * (mcm1957) Change: Adapter has been migrated to iobroker-community-adapters organisation
