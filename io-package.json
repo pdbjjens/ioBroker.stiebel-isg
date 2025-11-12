@@ -166,6 +166,7 @@
     "isgPassword"
   ],
   "encryptedNative": [
+    "isgUser",
     "isgPassword"
   ],
   "native": {
