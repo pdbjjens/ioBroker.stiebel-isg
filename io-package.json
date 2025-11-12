@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "stiebel-isg",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "news": {
+      "2.0.1": {
+        "en": "**Fixed**: ioBroker warnings are avoided by clamping any values exceeding min/max to the min value before setting. (fixes #53 & #65)",
+        "de": "**Fixed**: ioBroker Warnungen werden vermieden, indem Werte größer als min/max vor dem Setzen auf den min-Wert gesetzt werden. (Fixes #53 & #65)",
+        "ru": "** Фиксированный**: предостережения ioBroker избегают, зажимая любые значения, превышающие мин/макс, до значения мин перед установкой. (Исправления #53 и #65)",
+        "pt": "**Resolvido**: as advertências de ioBroker são evitadas através da fixação de quaisquer valores superiores a min/máx ao valor min antes da regulação. (fixos #53 & #65)",
+        "nl": "**Fixed**: ioBroker-waarschuwingen worden vermeden door waarden boven min/max aan de min-waarde te bevestigen voordat ze worden ingesteld. (fixeert #53 & #65)",
+        "fr": "**Fixé**: les avertissements ioBroker sont évités en resserrant toute valeur dépassant min/max jusqu'à la valeur min avant réglage. (fixe #53 & #65)",
+        "it": "**Fixed**: gli avvisi ioBroker vengono evitati bloccando i valori superiori a min/max al valore minimo prima dell'impostazione. (fissi n. 53 e n.65)",
+        "es": "**Fixed**: las advertencias de ioBroker se evitan mediante la fijación de valores superiores a min/max al valor min antes de establecer. (fixes #53 > 65)",
+        "pl": "* *Naprawiono* *: przed ustawieniem ostrzeżeń jOBrokera należy unikać zaciskania wartości przekraczających min / max do wartości min. (poprawki # 53 i # 65) ",
+        "uk": "**Фіксований**: попередження ioBroker уникнути, затискаючи будь-які значення, що перевищують min/max до мінімального значення перед встановленням. (фікси #53 та #65)",
+        "zh-cn": "** Fixed**: ioBroker 警告通过在设定前将任何超过分钟/最大值的值夹住到分钟值来避免。 (编号#53 & 65)"
+      },
       "2.0.0": {
         "en": "Change: Adapter has been migrated to iobroker-community-adapters organisation\nChange: Adapter requires node.js >= 20, js-controller >= 6.0.11 and admin >= 7.6.17 now\nFix: Dependencies have been updated\nChange: remove .npmignore\nChange: migrate adapter configuration to jsonConfig\nChange: migrate from deprecated \"request\" http client to native fetch API\nFix: min/max handling",
         "de": "Änderung: Adapter wurde auf iobroker-community-Adapter-Organisation migriert\nÄnderung: Adapter erfordert node.js >= 20, js-controller >= 6.0.11 und admin >= 7.6.17\nFix: Abhängigkeiten wurden aktualisiert\nÄnderung: .npmignore entfernt\nÄnderung: Adapterkonfiguration auf jsonConfig migriert\nÄnderung: http-Client zu nativer fetch API migriert\nFix: min/max Handhabung",
@@ -80,19 +93,6 @@
         "pl": "poprawa bezpieczeństwa",
         "uk": "підвищення безпеки",
         "zh-cn": "安全改善"
-      },
-      "1.7.3": {
-        "en": "bugfix",
-        "de": "Fehlerbehebung",
-        "ru": "багфикс",
-        "pt": "correção de erros",
-        "nl": "vuur",
-        "fr": "bugfix",
-        "it": "bugfix",
-        "es": "bugfix",
-        "pl": "trąbka",
-        "uk": "шемале",
-        "zh-cn": "b ugfix"
       }
     },
     "titleLang": {
