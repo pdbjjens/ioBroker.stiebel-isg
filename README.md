@@ -1,8 +1,6 @@
-# ioBroker.stiebel-isg
-
 ![Logo](admin/stiebel-isg.png)
 
-## ioBroker adapter for STIEBEL ELTRON/Tecalor Internet Service Gateways (ISG)
+# ioBroker.stiebel-isg
 
 [![NPM version](https://img.shields.io/npm/v/iobroker.stiebel-isg.svg)](https://www.npmjs.com/package/iobroker.stiebel-isg)
 ![Version (stable)](https://iobroker.live/badges/stiebel-isg-stable.svg)
@@ -13,7 +11,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.stiebel-isg.svg?data=d,s)](https://www.npmjs.com/package/iobroker.stiebel-isg)
 
-## Info
+## ioBroker adapter for STIEBEL ELTRON/Tecalor Internet Service Gateways (ISG)
 
 This adapter reads values from STIEBEL ELTRON/Tecalor Internet Service Gateways (ISG) web pages and can send commands to control the device.
 
@@ -40,8 +38,12 @@ If you update this adapter from a previous version instead of a new installation
 
 1. You need a fully configured and running STIEBEL ELTRON or Tecalor Internet Service Gateway (ISG Web or ISG Plus) in the same network as your ioBroker server.
 2. Install the adapter on your ioBroker server and create an instance
-3. Configure the instance by entering the IP-address or domain name of the ISG and if configured in the ISG, the user name and password.  
-The other settings and the the list of the web pages of the ISG on tab URLs should be left at their default values unless you know what you are doing.
+
+## Configuration
+
+1. Configure the instance by entering the IP-address or domain name of the ISG and if configured in the ISG, the user name and password.  
+2. The other settings and the the list of the web pages of the ISG on tab URLs may be left at their default values.
+3. You can improve performance and reduce the load on the ISG if you remove any paths from the URLs tab which do not exist in you ISG Web GUI or which you are not interested in. You can easily identify the URLs by opening the ISG SERVICEWELT Web page and open the various navigation tabs one by one. The URL of the respective page is shown in your browser e.g http://IP-of-your-ISG/?s=1,0 is the value path to INFO/ANLAGE.
 
 ## Changelog
 
@@ -51,7 +53,7 @@ The other settings and the the list of the web pages of the ISG on tab URLs shou
 -->
 ### **WORK IN PROGRESS**
 
-* (pdbjjens) Fix: Avoid warnings if ISG sets default value 36864 (#53 & #65)
+* (pdbjjens) **Fixed**: ioBroker warnings are avoided by clamping any values exceeding min/max to the min value before setting. (fixes #53 & #65)
 
 ### 2.0.0 (2025-10-27)
 
