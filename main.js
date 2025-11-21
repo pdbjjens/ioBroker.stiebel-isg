@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 /**
  * stiebel-eltron / tecalor isg adapter - main.js v13
@@ -376,13 +376,18 @@ async function getHTML(sidePath) {
         built.clearTimeout();
 
         const status = res && typeof res.status !== 'undefined' ? res.status : null;
+        //adapter.log.error(`getHTML - statusCode: ${status || 'no response'}`);
+        //adapter.log.error(`getHTML - statusText: ${res && res.statusText ? res.statusText : ''}`);
+
         if (status === 200) {
             const text = await res.text();
+            //adapter.log.debug(`getHTML - Text: ${text.substring(0, text.length)} ...`);
+
             adapter.setState('info.connection', true, true);
             return cheerio.load(text);
         }
-        adapter.log.error(`statusCode: ${status || 'no response'}`);
-        adapter.log.error(`statusText: ${res && res.statusText ? res.statusText : ''}`);
+        //adapter.log.error(`statusCode: ${status || 'no response'}`);
+        //adapter.log.error(`statusText: ${res && res.statusText ? res.statusText : ''}`);
         adapter.setState('info.connection', false, true);
         throw new Error(`HTTP ${status}`);
     } catch (error) {
@@ -1206,7 +1211,7 @@ function rebootISG() {
         });
 }
 
-function main() {
+async function main() {
     adapter.setObjectNotExists(
         'ISGReboot',
         {
@@ -1249,6 +1254,28 @@ function main() {
     // host = host.replace(/\/+$/, '');
 
     adapter.subscribeStates('*');
+
+    // check username and password
+    try {
+        const $ = await getHTML('1,0');
+        if ($) {
+            let loginPage;
+            try {
+                loginPage = $('#main').attr('class');
+            } catch (e) {
+                adapter.log.error(`#main error: ${e.message || e}`);
+            }
+            if (loginPage && loginPage != null && loginPage != undefined && String(loginPage) === 'login') {
+                adapter.log.error('ISG Login failed - please check your username and password!');
+                adapter.setState('info.connection', false, true);
+                return;
+            }
+            adapter.log.info('Connected to ISG successfully.');
+            adapter.setState('info.connection', true, true);
+        }
+    } catch (e) {
+        adapter.log.error(`checkIsgCredentials error: ${e.message || e}`);
+    }
 
     // schedule initial fetches with concurrency control
     statusPaths.forEach(function (item) {
