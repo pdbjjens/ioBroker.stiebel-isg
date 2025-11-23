@@ -1,4 +1,4 @@
-//'use strict';
+'use strict';
 
 /**
  * stiebel-eltron / tecalor isg adapter - main.js v13
@@ -376,18 +376,11 @@ async function getHTML(sidePath) {
         built.clearTimeout();
 
         const status = res && typeof res.status !== 'undefined' ? res.status : null;
-        //adapter.log.error(`getHTML - statusCode: ${status || 'no response'}`);
-        //adapter.log.error(`getHTML - statusText: ${res && res.statusText ? res.statusText : ''}`);
-
         if (status === 200) {
             const text = await res.text();
-            //adapter.log.debug(`getHTML - Text: ${text.substring(0, text.length)} ...`);
-
             adapter.setState('info.connection', true, true);
             return cheerio.load(text);
         }
-        //adapter.log.error(`statusCode: ${status || 'no response'}`);
-        //adapter.log.error(`statusText: ${res && res.statusText ? res.statusText : ''}`);
         adapter.setState('info.connection', false, true);
         throw new Error(`HTTP ${status}`);
     } catch (error) {
@@ -513,7 +506,7 @@ async function getIsgValues(sidePath) {
                         const unit = (param || '')
                             .replace(/[ ]{0,2}/, '')
                             .replace(/ /g, '')
-                            .replace(value, '')
+                            .replace(String(value), '')
                             .replace(/([.0][0]){1}?/, '')
                             .replace(/^0+/, '');
 
