@@ -51,6 +51,7 @@ let host;
 let commandPaths = [];
 let valuePaths = [];
 let statusPaths = [];
+let minmaxlogging = false; // enable detailed min/max logging
 
 /* -------------------------
    Concurrency queue (simple, dependency-free)
@@ -381,8 +382,6 @@ async function getHTML(sidePath) {
             adapter.setState('info.connection', true, true);
             return cheerio.load(text);
         }
-        adapter.log.error(`statusCode: ${status || 'no response'}`);
-        adapter.log.error(`statusText: ${res && res.statusText ? res.statusText : ''}`);
         adapter.setState('info.connection', false, true);
         throw new Error(`HTTP ${status}`);
     } catch (error) {
@@ -508,7 +507,7 @@ async function getIsgValues(sidePath) {
                         const unit = (param || '')
                             .replace(/[ ]{0,2}/, '')
                             .replace(/ /g, '')
-                            .replace(value, '')
+                            .replace(String(value), '')
                             .replace(/([.0][0]){1}?/, '')
                             .replace(/^0+/, '');
 
@@ -589,9 +588,7 @@ function createISGCommands(
 
     // Diagnostic debug: print the raw valMin/valMax encountered (debug-only)
     try {
-        adapter &&
-            adapter.log &&
-            adapter.log.debug &&
+        minmaxlogging &&
             adapter.log.debug(
                 `createISGCommands: encountered valMin="${valMin}" valMax="${valMax}" for ${strGroup}.${valTag}`,
             );
@@ -607,16 +604,11 @@ function createISGCommands(
             if (Number.isFinite(minNum)) {
                 desiredCommon.min = minNum;
             } else {
-                adapter &&
-                    adapter.log &&
-                    adapter.log.debug &&
+                minmaxlogging &&
                     adapter.log.debug(`createISGCommands: invalid min "${valMin}" for ${strGroup}.${valTag} - ignored`);
             }
         } else {
-            adapter &&
-                adapter.log &&
-                adapter.log.debug &&
-                adapter.log.debug(`createISGCommands: empty min for ${strGroup}.${valTag} - ignored`);
+            minmaxlogging && adapter.log.debug(`createISGCommands: empty min for ${strGroup}.${valTag} - ignored`);
         }
     }
 
@@ -627,16 +619,11 @@ function createISGCommands(
             if (Number.isFinite(maxNum)) {
                 desiredCommon.max = maxNum;
             } else {
-                adapter &&
-                    adapter.log &&
-                    adapter.log.debug &&
+                minmaxlogging &&
                     adapter.log.debug(`createISGCommands: invalid max "${valMax}" for ${strGroup}.${valTag} - ignored`);
             }
         } else {
-            adapter &&
-                adapter.log &&
-                adapter.log.debug &&
-                adapter.log.debug(`createISGCommands: empty max for ${strGroup}.${valTag} - ignored`);
+            minmaxlogging && adapter.log.debug(`createISGCommands: empty max for ${strGroup}.${valTag} - ignored`);
         }
     }
 
@@ -1206,7 +1193,7 @@ function rebootISG() {
         });
 }
 
-function main() {
+async function main() {
     adapter.setObjectNotExists(
         'ISGReboot',
         {
@@ -1249,6 +1236,28 @@ function main() {
     // host = host.replace(/\/+$/, '');
 
     adapter.subscribeStates('*');
+
+    // check username and password
+    try {
+        const $ = await getHTML('1,0');
+        if ($) {
+            let loginPage;
+            try {
+                loginPage = $('#main').attr('class');
+            } catch (e) {
+                adapter.log.error(`#main error: ${e.message || e}`);
+            }
+            if (loginPage && loginPage != null && loginPage != undefined && String(loginPage) === 'login') {
+                adapter.log.error('ISG Login failed - please check your username and password!');
+                adapter.setState('info.connection', false, true);
+                return;
+            }
+            adapter.log.info('Connected to ISG successfully.');
+            adapter.setState('info.connection', true, true);
+        }
+    } catch (e) {
+        adapter.log.error(`checkIsgCredentials error: ${e.message || e}`);
+    }
 
     // schedule initial fetches with concurrency control
     statusPaths.forEach(function (item) {
