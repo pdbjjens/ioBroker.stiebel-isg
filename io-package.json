@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "stiebel-isg",
-    "version": "2.0.1",
+    "version": "2.0.2",
     "news": {
+      "2.0.2": {
+        "en": "**Fixed**: Adapter hangup on wrong credentials. (fixes #127)",
+        "de": "**Fixed**: Adapter hängt bei falschen Anmeldeinformationen. (fixt #127)",
+        "ru": "** Исправлено**: Адаптер зависает на неправильных учетных данных. (Исправления #127)",
+        "pt": "**Resolvido**: Desligamento do adaptador com credenciais erradas. (fixos #127)",
+        "nl": "**Fixed**: Adapter hangup op verkeerde referenties. (fixeert #127)",
+        "fr": "**Fixé**: Adaptateur suspendu sur de mauvaises références. (fixe #127)",
+        "it": "**Fixed**: Hangup adattatore su credenziali sbagliate. (fissi n. 127)",
+        "es": "**Fixed**: Colgador de Adaptador en credenciales equivocadas. (fixes #127)",
+        "pl": "* *Naprawiono* *: Rozłączanie adapterów na złych referencjach. (poprawki # 127) ",
+        "uk": "**Фіксований**: Переміщення адаптера на невірних облікових записах. (фікси #127)",
+        "zh-cn": "** Fixed**:适配器挂在错误的证书上. (编号 #127)"
+      },
       "2.0.1": {
         "en": "**Fixed**: ioBroker warnings are avoided by clamping any values exceeding min/max to the min value before setting. (fixes #53 & #65)",
         "de": "**Fixed**: ioBroker Warnungen werden vermieden, indem Werte größer als min/max vor dem Setzen auf den min-Wert gesetzt werden. (Fixes #53 & #65)",
@@ -69,19 +82,6 @@
         "zh-cn": "fix 控方诉5"
       },
       "1.7.5": {
-        "en": "security improvements",
-        "de": "Verbesserung der Sicherheit",
-        "ru": "улучшения безопасности",
-        "pt": "melhorias de segurança",
-        "nl": "beveiliging verbetert",
-        "fr": "amélioration de la sécurité",
-        "it": "miglioramento della sicurezza",
-        "es": "mejoras de seguridad",
-        "pl": "poprawa bezpieczeństwa",
-        "uk": "підвищення безпеки",
-        "zh-cn": "安全改善"
-      },
-      "1.7.4": {
         "en": "security improvements",
         "de": "Verbesserung der Sicherheit",
         "ru": "улучшения безопасности",

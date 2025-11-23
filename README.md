@@ -52,7 +52,7 @@ If you update this adapter from a previous version instead of a new installation
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 2.0.2 (2025-11-23)
 
 * (pdbjjens) **Fixed**: Adapter hangup on wrong credentials. (fixes #127)
 
@@ -77,10 +77,6 @@ If you update this adapter from a previous version instead of a new installation
 ### 1.7.6
 
 * fix error with controller v5
-
-### 1.7.5
-
-* security enhancements
 
 ## Legal Notices
 
