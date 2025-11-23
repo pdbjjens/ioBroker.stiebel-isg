@@ -51,6 +51,7 @@ let host;
 let commandPaths = [];
 let valuePaths = [];
 let statusPaths = [];
+let minmaxlogging = false; // enable detailed min/max logging
 
 /* -------------------------
    Concurrency queue (simple, dependency-free)
@@ -587,9 +588,7 @@ function createISGCommands(
 
     // Diagnostic debug: print the raw valMin/valMax encountered (debug-only)
     try {
-        adapter &&
-            adapter.log &&
-            adapter.log.debug &&
+        minmaxlogging &&
             adapter.log.debug(
                 `createISGCommands: encountered valMin="${valMin}" valMax="${valMax}" for ${strGroup}.${valTag}`,
             );
@@ -605,16 +604,11 @@ function createISGCommands(
             if (Number.isFinite(minNum)) {
                 desiredCommon.min = minNum;
             } else {
-                adapter &&
-                    adapter.log &&
-                    adapter.log.debug &&
+                minmaxlogging &&
                     adapter.log.debug(`createISGCommands: invalid min "${valMin}" for ${strGroup}.${valTag} - ignored`);
             }
         } else {
-            adapter &&
-                adapter.log &&
-                adapter.log.debug &&
-                adapter.log.debug(`createISGCommands: empty min for ${strGroup}.${valTag} - ignored`);
+            minmaxlogging && adapter.log.debug(`createISGCommands: empty min for ${strGroup}.${valTag} - ignored`);
         }
     }
 
@@ -625,16 +619,11 @@ function createISGCommands(
             if (Number.isFinite(maxNum)) {
                 desiredCommon.max = maxNum;
             } else {
-                adapter &&
-                    adapter.log &&
-                    adapter.log.debug &&
+                minmaxlogging &&
                     adapter.log.debug(`createISGCommands: invalid max "${valMax}" for ${strGroup}.${valTag} - ignored`);
             }
         } else {
-            adapter &&
-                adapter.log &&
-                adapter.log.debug &&
-                adapter.log.debug(`createISGCommands: empty max for ${strGroup}.${valTag} - ignored`);
+            minmaxlogging && adapter.log.debug(`createISGCommands: empty max for ${strGroup}.${valTag} - ignored`);
         }
     }
 
