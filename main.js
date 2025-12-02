@@ -141,9 +141,13 @@ function getFetch() {
         return fetchFactory(globalThis.fetch, jarInst);
     } catch (err) {
         try {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-expect-error
             return fetchFactory(jarInst, globalThis.fetch);
         } catch (err2) {
-            const msg = `Failed to create cookie-wrapped fetch: ${err.message}; ${err2 && err2.message}`;
+            const errMsg = err instanceof Error ? err.message : String(err);
+            const err2Msg = err2 instanceof Error ? err2.message : String(err2);
+            const msg = `Failed to create cookie-wrapped fetch: ${errMsg}; ${err2Msg}`;
             if (adapter && adapter.log) {
                 adapter.log.error(msg);
             }
@@ -156,7 +160,6 @@ function getFetch() {
  * Build fetch options and timeout/abort logic.
  * Returns { options, clearTimeout }.
  */
-
 function buildFetchOptions(url, extra = {}) {
     let configuredTimeout = 60000;
     try {
@@ -186,12 +189,14 @@ function buildFetchOptions(url, extra = {}) {
     const opts = Object.assign(
         {
             signal: controller.signal,
-            credentials: 'include',
+            // eslint-disable-next-line jsdoc/check-tag-names
+            credentials: /** @type {RequestCredentials} */ ('include'),
         },
         extra,
     );
 
     if (undiciDispatcher) {
+        // @ts-expect-error: dispatcher is Undici-specific and not in standard fetch options
         opts.dispatcher = undiciDispatcher;
     }
 
@@ -290,7 +295,10 @@ function safeSetState(id, val, ack = true, expire) {
                 }
             }
         } catch (e) {
-            adapter.log.silly && adapter.log.silly(`safeSetState: clamp check error for ${id}: ${e.message || e}`);
+            adapter.log.silly &&
+                adapter.log.silly(
+                    `safeSetState: clamp check error for ${id}: ${e instanceof Error ? e.message : String(e)}`,
+                );
         }
 
         try {
@@ -378,6 +386,7 @@ async function getHTML(sidePath) {
 
         const status = res && typeof res.status !== 'undefined' ? res.status : null;
         if (status === 200) {
+            // @ts-expect-error: .res.text() exists
             const text = await res.text();
             adapter.setState('info.connection', true, true);
             return cheerio.load(text);
@@ -386,10 +395,17 @@ async function getHTML(sidePath) {
         throw new Error(`HTTP ${status}`);
     } catch (error) {
         built.clearTimeout();
-        if (error && (error.name === 'AbortError' || String(error).toLowerCase().includes('aborted'))) {
-            adapter.log.debug(`getHTML(${sidePath}) aborted: ${error.message || error}`);
+        if (
+            (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') ||
+            String(error).toLowerCase().includes('aborted')
+        ) {
+            adapter.log.debug(
+                `getHTML(${sidePath}) aborted: ${error instanceof Error ? error.message : String(error)}`,
+            );
         } else {
-            adapter.log.error(`Error: ${error.message || error} to ${strURL} - Check ISG Address!`);
+            adapter.log.error(
+                `Error: ${typeof error === 'object' && error !== null && 'message' in error ? error.message : String(error)} to ${strURL} - Check ISG Address!`,
+            );
         }
         adapter.setState('info.connection', false, true);
         throw error;
@@ -463,7 +479,7 @@ async function getIsgStatus(sidePath) {
             });
         }
     } catch (e) {
-        adapter.log.debug(`getIsgStatus(${sidePath}) error: ${e.message || e}`);
+        adapter.log.debug(`getIsgStatus(${sidePath}) error: ${e instanceof Error ? e.message : String(e)}`);
     }
 }
 
@@ -544,7 +560,8 @@ async function getIsgValues(sidePath) {
             });
         }
     } catch (e) {
-        adapter.log.debug(`getIsgValues(${sidePath}) error: ${e.message || e}`);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        adapter.log.debug(`getIsgValues(${sidePath}) error: ${errorMessage}`);
     }
 }
 
@@ -803,9 +820,11 @@ async function getIsgCommands(sidePath) {
                 // parse infographics on start page
                 let scriptValues = null;
                 try {
+                    // @ts-expect-error: .data may be missing
                     scriptValues = $('#buehne').next().next().get()[0].children[0].data;
                 } catch {
                     try {
+                        // @ts-expect-error: .data may be missing
                         scriptValues = $('#buehne').next().next().next().get()[0].children[0].data;
                     } catch {
                         scriptValues = null;
@@ -876,14 +895,14 @@ async function getIsgCommands(sidePath) {
                 .each(function (_i, el) {
                     try {
                         if (String(sidePath) === '0') {
-                            let valCommand;
-                            let idCommand;
                             let statesCommand = '';
                             const nameCommand = $(el).parent().parent().find('h3').text();
                             if (nameCommand == 'Betriebsart') {
                                 const idStartCommand = $(el).attr('name');
                                 if (idStartCommand && idStartCommand.match(/aval/)) {
                                     statesCommand = '{';
+                                    let idCommand;
+                                    let valCommand = undefined; // Always define valCommand
                                     $(el)
                                         .parent()
                                         .parent()
@@ -895,17 +914,23 @@ async function getIsgCommands(sidePath) {
                                                 .find('input')
                                                 .each(function (_k, elem) {
                                                     idCommand = $(elem).attr('name');
-                                                    if (!(idCommand.match(/aval/) || idCommand.match(/info/))) {
+                                                    if (
+                                                        idCommand &&
+                                                        !(idCommand.match(/aval/) || idCommand.match(/info/))
+                                                    ) {
                                                         if (idCommand.match(/[0-9]s/)) {
                                                             if (statesCommand !== '{') {
                                                                 statesCommand += ',';
                                                             }
                                                             statesCommand += `"${$(elem).attr('value')}":"${$(elem).next().text()}"`;
                                                         } else {
-                                                            valCommand = $(elem).attr('value');
-                                                            valCommand = parseFloat(
-                                                                valCommand.replace(',', '.').replace(' ', ''),
-                                                            );
+                                                            let tempVal = $(elem).attr('value');
+                                                            valCommand =
+                                                                tempVal !== undefined && tempVal !== null
+                                                                    ? parseFloat(
+                                                                          tempVal.replace(',', '.').replace(' ', ''),
+                                                                      )
+                                                                    : undefined;
                                                         }
                                                     }
                                                 });
@@ -945,7 +970,13 @@ async function getIsgCommands(sidePath) {
 
                                             if ($(el).attr('checked') == 'checked') {
                                                 valCommand = $(el).attr('value');
-                                                valCommand = parseFloat(valCommand.replace(',', '.').replace(' ', ''));
+                                                if (typeof valCommand === 'string') {
+                                                    valCommand = parseFloat(
+                                                        valCommand.replace(',', '.').replace(' ', ''),
+                                                    );
+                                                } else {
+                                                    valCommand = undefined;
+                                                }
                                             }
                                         });
                                     statesCommand += '}';
@@ -992,9 +1023,13 @@ async function getIsgCommands(sidePath) {
                                             .each(function (_j, inp) {
                                                 if ($(inp).attr('checked') == 'checked') {
                                                     valCommand = $(inp).attr('value');
-                                                    valCommand = parseFloat(
-                                                        valCommand.replace(',', '.').replace(' ', ''),
-                                                    );
+                                                    if (typeof valCommand === 'string') {
+                                                        valCommand = parseFloat(
+                                                            valCommand.replace(',', '.').replace(' ', ''),
+                                                        );
+                                                    } else {
+                                                        valCommand = undefined;
+                                                    }
                                                 }
                                             });
                                         if (submenu) {
@@ -1019,8 +1054,9 @@ async function getIsgCommands(sidePath) {
 
                                 if (parentsID.includes('chval')) {
                                     try {
-                                        scriptValues = $(el).parent().parent().next().next().next().get()[0]
-                                            .children[0].data;
+                                        // @ts-expect-error: .data may be missing
+                                        // eslint-disable-next-line prettier/prettier
+                                        scriptValues = $(el).parent().parent().next().next().next().get()[0].children[0].data;
                                     } catch {
                                         try {
                                             scriptValues = $(el).parent().parent().next().next().next().text();
@@ -1033,7 +1069,7 @@ async function getIsgCommands(sidePath) {
                                         const nameCommand = $(el).parent().parent().parent().find('h3').text();
                                         const minCommand = scriptValues.match(/\['min'] = '(.*?)'/);
                                         const maxCommand = scriptValues.match(/\['max'] = '(.*?)'/);
-                                        const valCommand = scriptValues.match(/\['val']='(.*?)'/);
+                                        const valCommandMatch = scriptValues.match(/\['val']='(.*?)'/);
                                         const idCommand = scriptValues.match(/\['id']='(.*?)'/);
                                         const unitCommand = $(el).parent().parent().parent().find('.append-1').text();
 
@@ -1050,21 +1086,41 @@ async function getIsgCommands(sidePath) {
                                                 unitCommand,
                                                 'state',
                                                 parseFloat(
-                                                    valCommand ? valCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    valCommandMatch
+                                                        ? String(valCommandMatch[1]).replace(',', '.').replace(' ', '')
+                                                        : 'NaN',
                                                 ),
                                                 '',
                                                 parseFloat(
-                                                    minCommand ? minCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    String(
+                                                        minCommand
+                                                            ? minCommand[1].replace(',', '.').replace(' ', '')
+                                                            : NaN,
+                                                    ),
                                                 ),
                                                 parseFloat(
-                                                    maxCommand ? maxCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    String(
+                                                        maxCommand
+                                                            ? maxCommand[1].replace(',', '.').replace(' ', '')
+                                                            : NaN,
+                                                    ),
                                                 ),
                                             );
                                         }
                                     }
                                 } else {
                                     try {
-                                        scriptValues = $(el).next().get()[0].children[0].data;
+                                        const nextNode = $(el).next().get()[0];
+                                        if (
+                                            nextNode &&
+                                            nextNode.children &&
+                                            nextNode.children[0] &&
+                                            'data' in nextNode.children[0]
+                                        ) {
+                                            scriptValues = nextNode.children[0].data;
+                                        } else {
+                                            scriptValues = undefined;
+                                        }
                                     } catch {
                                         try {
                                             scriptValues = $(el).next().text();
@@ -1078,7 +1134,7 @@ async function getIsgCommands(sidePath) {
 
                                         const minCommand = scriptValues.match(/\['min'] = '(.*?)'/);
                                         const maxCommand = scriptValues.match(/\['max'] = '(.*?)'/);
-                                        const valCommand = scriptValues.match(/\['val']='(.*?)'/);
+                                        const valCommandMatch = scriptValues.match(/\['val']='(.*?)'/);
                                         const idCommand = scriptValues.match(/\['id']='(.*?)'/);
                                         const unitCommand = $(el).parent().parent().find('.append-1').text();
 
@@ -1095,14 +1151,24 @@ async function getIsgCommands(sidePath) {
                                                 unitCommand,
                                                 'state',
                                                 parseFloat(
-                                                    valCommand ? valCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    valCommandMatch
+                                                        ? valCommandMatch[1].replace(',', '.').replace(' ', '')
+                                                        : 'NaN',
                                                 ),
                                                 '',
                                                 parseFloat(
-                                                    minCommand ? minCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    String(
+                                                        minCommand
+                                                            ? minCommand[1].replace(',', '.').replace(' ', '')
+                                                            : NaN,
+                                                    ),
                                                 ),
                                                 parseFloat(
-                                                    maxCommand ? maxCommand[1].replace(',', '.').replace(' ', '') : NaN,
+                                                    String(
+                                                        maxCommand
+                                                            ? maxCommand[1].replace(',', '.').replace(' ', '')
+                                                            : NaN,
+                                                    ),
                                                 ),
                                             );
                                         }
@@ -1111,12 +1177,14 @@ async function getIsgCommands(sidePath) {
                             }
                         }
                     } catch (errInner) {
-                        adapter.log.debug(`getIsgCommands input-parse error: ${errInner.message || errInner}`);
+                        const errorMessage = errInner instanceof Error ? errInner.message : String(errInner);
+                        adapter.log.debug(`getIsgCommands input-parse error: ${errorMessage}`);
                     }
                 });
         }
     } catch (e) {
-        adapter.log.debug(`getIsgCommands(${sidePath}) error: ${e.message || e}`);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        adapter.log.debug(`getIsgCommands(${sidePath}) error: ${errorMessage}`);
     }
 }
 
@@ -1155,14 +1223,17 @@ function setIsgCommands(strKey, strValue) {
                 });
             } else {
                 adapter.log.error(`statusCode: ${res ? res.status : 'no response'}`);
-                adapter.log.error(`statusText: ${res ? res.statusText : ''}`);
+                adapter.log.error(`statusText: ${res && 'statusText' in res ? res.statusText : ''}`);
             }
         } catch (error) {
             built.clearTimeout();
-            if (error && (error.name === 'AbortError' || String(error).toLowerCase().includes('aborted'))) {
-                adapter.log.debug(`setIsgCommands aborted: ${error.message || error}`);
+            const errorMessage = error instanceof Error ? error.message : String(error);
+            if (error && typeof error === 'object' && 'name' in error && error.name === 'AbortError') {
+                adapter.log.debug(`setIsgCommands aborted: ${errorMessage}`);
+            } else if (String(error).toLowerCase().includes('aborted')) {
+                adapter.log.debug(`setIsgCommands aborted: ${errorMessage}`);
             } else {
-                adapter.log.error(`Error: ${error.message || error}`);
+                adapter.log.error(`Error: ${errorMessage}`);
             }
         }
         commands = [];
@@ -1185,10 +1256,13 @@ function rebootISG() {
         })
         .catch(err => {
             built.clearTimeout();
-            if (err && (err.name === 'AbortError' || String(err).toLowerCase().includes('aborted'))) {
-                adapter.log.debug(`rebootISG aborted: ${err.message || err}`);
+            if (
+                err &&
+                ((err instanceof Error && err.name === 'AbortError') || String(err).toLowerCase().includes('aborted'))
+            ) {
+                adapter.log.debug(`rebootISG aborted: ${err instanceof Error ? err.message : err}`);
             } else {
-                adapter.log.error(`Reboot request failed: ${err.message || err}`);
+                adapter.log.error(`Reboot request failed: ${err instanceof Error ? err.message : err}`);
             }
         });
 }
@@ -1245,7 +1319,8 @@ async function main() {
             try {
                 loginPage = $('#main').attr('class');
             } catch (e) {
-                adapter.log.error(`#main error: ${e.message || e}`);
+                const errorMessage = e instanceof Error ? e.message : String(e);
+                adapter.log.error(`#main error: ${errorMessage}`);
             }
             if (loginPage && loginPage != null && loginPage != undefined && String(loginPage) === 'login') {
                 adapter.log.error('ISG Login failed - please check your username and password!');
@@ -1256,7 +1331,8 @@ async function main() {
             adapter.setState('info.connection', true, true);
         }
     } catch (e) {
-        adapter.log.error(`checkIsgCredentials error: ${e.message || e}`);
+        const errorMessage = e instanceof Error ? e.message : String(e);
+        adapter.log.error(`checkIsgCredentials error: ${errorMessage}`);
     }
 
     // schedule initial fetches with concurrency control
@@ -1403,6 +1479,7 @@ function startAdapter(options) {
    Export / start
    ------------------------- */
 
+// @ts-expect-error: module is defined in adapter-core
 if (module && module.parent) {
     module.exports = startAdapter;
 } else {
