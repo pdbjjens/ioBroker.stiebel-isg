@@ -295,8 +295,8 @@ function safeSetState(id, val, ack = true, expire) {
                 }
             }
         } catch (e) {
-            adapter.log.silly &&
-                adapter.log.silly(
+            adapter.log.debug &&
+                adapter.log.debug(
                     `safeSetState: clamp check error for ${id}: ${e instanceof Error ? e.message : String(e)}`,
                 );
         }
@@ -926,7 +926,9 @@ async function getIsgCommands(sidePath) {
                                                         } else {
                                                             let tempVal = $(elem).attr('value');
                                                             valCommand =
-                                                                tempVal !== undefined && tempVal !== null
+                                                                tempVal !== undefined &&
+                                                                tempVal !== null &&
+                                                                typeof tempVal === 'string'
                                                                     ? parseFloat(
                                                                           tempVal.replace(',', '.').replace(' ', ''),
                                                                       )
@@ -969,14 +971,13 @@ async function getIsgCommands(sidePath) {
                                             statesCommand += `"${$(el).attr('value')}":"${$(el).attr('alt')}"`;
 
                                             if ($(el).attr('checked') == 'checked') {
-                                                valCommand = $(el).attr('value');
-                                                if (typeof valCommand === 'string') {
-                                                    valCommand = parseFloat(
-                                                        valCommand.replace(',', '.').replace(' ', ''),
-                                                    );
-                                                } else {
-                                                    valCommand = undefined;
-                                                }
+                                                let tempVal = $(el).attr('value');
+                                                valCommand =
+                                                    tempVal !== undefined &&
+                                                    tempVal !== null &&
+                                                    typeof tempVal === 'string'
+                                                        ? parseFloat(tempVal.replace(',', '.').replace(' ', ''))
+                                                        : undefined;
                                             }
                                         });
                                     statesCommand += '}';
@@ -1022,14 +1023,13 @@ async function getIsgCommands(sidePath) {
                                             .find('input')
                                             .each(function (_j, inp) {
                                                 if ($(inp).attr('checked') == 'checked') {
-                                                    valCommand = $(inp).attr('value');
-                                                    if (typeof valCommand === 'string') {
-                                                        valCommand = parseFloat(
-                                                            valCommand.replace(',', '.').replace(' ', ''),
-                                                        );
-                                                    } else {
-                                                        valCommand = undefined;
-                                                    }
+                                                    let tempVal = $(inp).attr('value');
+                                                    valCommand =
+                                                        tempVal !== undefined &&
+                                                        tempVal !== null &&
+                                                        typeof tempVal === 'string'
+                                                            ? parseFloat(tempVal.replace(',', '.').replace(' ', ''))
+                                                            : undefined;
                                                 }
                                             });
                                         if (submenu) {
