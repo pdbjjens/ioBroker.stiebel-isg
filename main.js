@@ -1181,6 +1181,42 @@ async function getIsgCommands(sidePath) {
                         adapter.log.debug(`getIsgCommands input-parse error: ${errorMessage}`);
                     }
                 });
+            //"Info_alone" Felder
+            $('#werte')
+                .find('.info_alone')
+                .each(function (_i, el) {
+                    try {
+                        let valValue = undefined;
+                        let tempVal = $(el).text();
+                        valValue =
+                            tempVal !== undefined && tempVal !== null && typeof tempVal === 'string'
+                                ? parseFloat(tempVal.replace(',', '.').replace(' ', ''))
+                                : undefined;
+
+                        const nameCommand = $(el).parent().parent().find('h3').text();
+                        const idCommand = $(el).parent().parent().attr('id');
+                        const unitCommand = $(el).parent().parent().find('.append-1').text();
+
+                        if (valValue) {
+                            if (submenu) {
+                                submenupath = '';
+                                submenupath += `.${submenu[1]}`;
+                            }
+                            updateState(
+                                `${translateName('settings')}.${group}${submenupath}`,
+                                idCommand,
+                                translateName(nameCommand),
+                                'number',
+                                unitCommand,
+                                'state',
+                                valValue,
+                            );
+                        }
+                    } catch (errInner) {
+                        const errorMessage = errInner instanceof Error ? errInner.message : String(errInner);
+                        adapter.log.debug(`getIsgCommands input-parse error: ${errorMessage}`);
+                    }
+                });
         }
     } catch (e) {
         const errorMessage = e instanceof Error ? e.message : String(e);
