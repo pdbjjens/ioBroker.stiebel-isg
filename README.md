@@ -53,8 +53,9 @@ If you update this adapter from a previous version instead of a new installation
 	### **WORK IN PROGRESS**
 -->
 ### **WORK IN PROGRESS**
-- (copilot) Adapter requires admin >= 7.7.22 now
 
+* (copilot) Adapter requires admin >= 7.7.22 now
+* (pdbjjens) **Fixed**: update release-script (#143)
 * (pdbjjens) **Fixed**: Cleanup some eslint issues
 
 ### 2.0.2 (2025-11-23)
