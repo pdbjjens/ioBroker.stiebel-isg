@@ -47,7 +47,11 @@ If you update this adapter from a previous version instead of a new installation
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### 2.1.0 (2026-09-09)
+### **WORK IN PROGRESS** - 2026H2 bugfix release
+
+* (pdbjjens) **Fixed**: Sporadic "fetch failed ... Check ISG connection!" (#221)
+
+### 2.1.0 (2026-09-09)  - 2026H2 maintenance release
 
 * (copilot) **Breaking**: Adapter requires node.js >= 22 now
 * (pdbjjens) **Fixed**: i18n directory migrated to short format
