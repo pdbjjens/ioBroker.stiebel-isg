@@ -25,7 +25,7 @@ This adapter reads values from STIEBEL ELTRON/Tecalor Internet Service Gateways 
 
 **Caution:** Version 2.x.x includes some Breaking Changes:
 
-* node.js >= 22, js-controller >= 6.0.11 and admin >= 7.7.22 is required  
+* node.js >= 22.19.0, js-controller >= 6.0.11 and admin >= 7.7.22 is required  
 Upgrade your ioBroker to at least this software level, if you want to use this adapter
 
 * Password and username encryption in config UI  
@@ -47,7 +47,13 @@ If you update this adapter from a previous version instead of a new installation
 	Placeholder for the next version (at the beginning of the line):
 	### **WORK IN PROGRESS**
 -->
-### 2.1.0 (2026-09-09)
+### **WORK IN PROGRESS** - 2026H2 bugfix release
+
+* (pdbjjens) **Breaking**: Adapter requires node.js >= 22.19.0 and undici >= 8.10.2 now
+* (pdbjjens) **Fixed**: Sporadic "fetch failed ... Check ISG connection!" (#221)
+* (pdbjjens) **New**: Configuration option to select either native fetch or undici fetch
+
+### 2.1.0 (2026-09-09)  - 2026H2 maintenance release
 
 * (copilot) **Breaking**: Adapter requires node.js >= 22 now
 * (pdbjjens) **Fixed**: i18n directory migrated to short format
