@@ -34,7 +34,7 @@ try {
         undiciFetch = undici.fetch;
     }
     if (typeof undici.Agent === 'function') {
-        undiciDispatcher = new undici.Agent({ keepAliveTimeout: 60000, connections: 6 });
+        undiciDispatcher = new undici.Agent({ keepAliveTimeout: 3000, connections: 6 });
     } else {
         undiciDispatcher = null;
     }
