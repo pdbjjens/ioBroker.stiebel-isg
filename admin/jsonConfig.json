@@ -63,6 +63,18 @@
           "lg": 4,
           "xl": 4
         },
+        "useNativeFetch": {
+          "type": "checkbox",
+          "label": "use native fetch",
+          "help": "use native fetch_help",
+          "tooltip": "use native fetch_tips",
+          "default": true,
+          "xs": 12,
+          "sm": 12,
+          "md": 6,
+          "lg": 4,
+          "xl": 4
+        },
         "isgExpert": {
           "type": "checkbox",
           "label": "enable expert values",

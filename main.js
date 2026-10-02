@@ -27,8 +27,12 @@ const fetchCookieModule = (() => {
 })();
 
 let undiciDispatcher = null;
+let undiciFetch = null;
 try {
     const undici = require('undici');
+    if (typeof undici.fetch === 'function') {
+        undiciFetch = undici.fetch;
+    }
     if (typeof undici.Agent === 'function') {
         undiciDispatcher = new undici.Agent({ keepAliveTimeout: 60000, connections: 6 });
     } else {
@@ -133,16 +137,24 @@ function getFetchFactory() {
 }
 
 function getFetch() {
-    ensureNativeFetch();
+    const useNativeFetch = adapter.config.useNativeFetch !== false;
+    if (useNativeFetch) {
+        ensureNativeFetch();
+    } else if (typeof undiciFetch !== 'function') {
+        const msg = 'undici.fetch() is not available. Please install a compatible undici npm package.';
+        if (adapter && adapter.log) {
+            adapter.log.error(msg);
+        }
+        throw new Error(msg);
+    }
+    const fetchImplementation = useNativeFetch ? globalThis.fetch : undiciFetch;
     const fetchFactory = getFetchFactory();
     const jarInst = getJar();
     try {
-        return fetchFactory(globalThis.fetch, jarInst);
+        return fetchFactory(fetchImplementation, jarInst);
     } catch (err) {
         try {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-expect-error
-            return fetchFactory(jarInst, globalThis.fetch);
+            return fetchFactory(jarInst, fetchImplementation);
         } catch (err2) {
             const errMsg = err instanceof Error ? err.message : String(err);
             const err2Msg = err2 instanceof Error ? err2.message : String(err2);
@@ -378,12 +390,13 @@ async function getHTML(sidePath) {
     });
 
     try {
+        // @ts-expect-error fetch-cookie's init type omits standard RequestInit fields.
         const res = await fetch(strURL, built.options);
         built.clearTimeout();
 
         const status = res && typeof res.status !== 'undefined' ? res.status : null;
         if (status === 200) {
-            // @ts-expect-error: .res.text() exists
+            // @ts-expect-error fetch-cookie's response type omits the standard text() method.
             const text = await res.text();
             adapter.setState('info.connection', true, true);
             return cheerio.load(text);
@@ -1248,6 +1261,7 @@ function setIsgCommands(strKey, strValue) {
         });
 
         try {
+            // @ts-expect-error fetch-cookie's init type omits standard RequestInit fields.
             const res = await fetch(`${host}/save.php`, built.options);
             built.clearTimeout();
             if (res && res.status == 200) {
@@ -1282,6 +1296,7 @@ function rebootISG() {
     const fetch = getFetch();
     const built = buildFetchOptions(url, { method: 'GET' });
 
+    // @ts-expect-error fetch-cookie's init type omits standard RequestInit fields.
     fetch(url, built.options)
         .then(() => {
             built.clearTimeout();
