@@ -204,7 +204,7 @@ function buildFetchOptions(url, extra = {}) {
         extra,
     );
 
-    if (undiciDispatcher) {
+    if (undiciDispatcher && adapter.config.useNativeFetch === false) {
         // @ts-expect-error: dispatcher is Undici-specific and not in standard fetch options
         opts.dispatcher = undiciDispatcher;
     }
